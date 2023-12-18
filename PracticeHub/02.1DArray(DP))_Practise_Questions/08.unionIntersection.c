@@ -1,87 +1,120 @@
+// 12.Write a C program to create an array of n elements using dynamic memory allocation to Find Union & Intersection of 2 arrays.
 #include<stdio.h>
 #include<stdlib.h>
-void main() 
+int main() 
 {
-    int i, j, k, n1, n2, min, unionCount = 0, intersectionCount = 0, flag;
-    int *array1 = NULL, *array2 = NULL, *unionArray = NULL, *intersectionArray = NULL;
+    int i, j, k, numElements1, numElements2, unionCount = 0, intersectionCount = 0, totalElements, flag, minEleCount;
+    int *i_arr1 = NULL, *i_arr2 = NULL, *unionArr = NULL, *intersectionArr = NULL, *tempArr = NULL;
+    
     // Array 1
-    printf("Total Element Count for Array1 : \n");
-    scanf("%d", &n1);
-    array1 = (int*)malloc(n1 * sizeof(int));
-    printf("Input %d Array1 Elements : \n", n1);
-    for(i = 0 ; i < n1 ; i++) 
+    printf("How Many Elements Do You Want To Enter In Array 1 : \n"); 
+    scanf("%d", &numElements1);   
+    i_arr1 = (int*)malloc(numElements1 * sizeof(int));
+    printf("Enter Array1 Elements : \n");
+    for(i = 0 ; i < numElements1 ; i++) 
     {
-        scanf("%d", (array1 + i));
+        scanf("%d", (i_arr1 + i));
     }
+
     // Array 2
-    printf("Total Element Count for Array2 : \n");
-    scanf("%d", &n2);
-    array2 = (int*)malloc(n2 * sizeof(int));
-    printf("Input %d Array2 Elements : \n", n2);
-    for(i = 0 ; i < n2 ; i++) 
+    printf("How Many Elements Do You Want To Enter In Array 2 : \n"); 
+    scanf("%d", &numElements2);   
+    i_arr2 = (int*)malloc(numElements2 * sizeof(int));
+    printf("Enter Array2 Elements : \n");
+    for(i = 0 ; i < numElements2 ; i++) 
     {
-        scanf("%d", (array2 + i));
+        scanf("%d", (i_arr2 + i));
     }
 
-
-    // Intersection Array
-    min = (n1 > n2) ? n2 : n1;
-    intersectionArray = (int*)malloc(min * sizeof(int));
-    for(i = 0 ; i < n1 ; i++) 
+    // Temporary Array 
+    totalElements = numElements1 + numElements2; 
+    tempArr = (int*)malloc(totalElements * sizeof(int));
+    for(i = 0 ; i < numElements1 ; i++)
     {
-        for(j = 0; j < n2 ; j++)
-        {
-            if(*(array1 + i) == *(array2 + j)) 
+        *(tempArr + i) = *(i_arr1 + i);
+        if(i == (numElements1 - 1)) 
+        {   
+            k = 0;
+            for(j = numElements1 ; j < totalElements ; j++)
             {
-                *(intersectionArray + intersectionCount) = *(array1 + i);
+                *(tempArr + j) = *(i_arr2 + k);
+                k++;
+            }
+        }
+    }
+
+    // Union Array 
+    unionArr = (int*)malloc(totalElements * sizeof(int));
+    unionCount = 0;
+    for(i = 0 ; i < totalElements ; i++)
+    {   
+        flag = 0;
+        j = i - 1;
+        while(j >= 0) 
+        {
+            if(*(tempArr + i) == *(tempArr + j))
+            {
+                flag = 1;
+                break;
+            }
+            j--;
+        }
+        if(flag == 0) 
+        {
+            *(unionArr + unionCount) = *(tempArr + i);
+            unionCount++;
+        }
+    }
+
+    printf("Union Array : \n");
+    for(i = 0 ; i < unionCount ; i++) 
+    {
+        printf("%d ", *(unionArr + i));
+    }
+    free(unionArr);
+    free(tempArr);
+    // Intersection Array
+    minEleCount = (numElements1 > numElements2) ? numElements2 : numElements1;
+    intersectionArr = (int*)malloc(minEleCount * sizeof(int));
+    intersectionCount = 0;
+    for(i = 0 ; i < numElements1 ; i++)
+    {
+        flag = 0;
+        j = i - 1;
+        while(j >= 0) 
+        {
+            if(*(i_arr1 + i) == *(i_arr1 + j)) 
+            {
+                flag = 1;
+                break;
+            }
+            j--;
+        }
+        if(flag == 0) 
+        {
+            flag = 0;
+            for(k = 0 ; k < numElements2 ; k++)
+            {
+                if(*(i_arr1 + i) == *(i_arr2 + k))
+                {
+                    flag = 1;
+                    break;
+                }
+            }
+            if(flag == 1) 
+            {
+                *(intersectionArr + intersectionCount) = *(i_arr1 + i);
                 intersectionCount++;
             }
         }
     }
 
-    printf("Intersection Array : \n");
-    for(i = 0 ; i < intersectionCount ; i++)
+    printf("\nIntersection Array : \n");
+    for(i = 0 ; i < intersectionCount; i++) 
     {
-        printf("%d ", *(intersectionArray + i));
+        printf("%d ", *(intersectionArr + i));
     }
+    free(intersectionArr);
 
-    // Union Array 
-    unionArray = (int*)malloc((n1 + n2) * sizeof(int));
-    for(i = 0 ; i < n1 ; i++)
-    {
-        *(unionArray + i) = *(array1 + i);
-
-        if(i == (n1 - 1)) 
-        {
-            unionCount = n1;
-
-            for(j = 0 ; j < n2 ; j++)
-            {   
-                flag = 0; 
-                for(k = 0 ; k < intersectionCount ; k++)
-                {
-                    if(*(array2 + j) == *(intersectionArray + k)) {
-                        flag = 1;
-                    }
-                }
-                if(flag == 0) 
-                {
-                    *(unionArray + unionCount) = *(array2 + j);
-                    unionCount++;
-                    
-                }
-            }
-        }
-    }
-    
-    printf("\nUnion Array : \n");
-    for(i = 0 ; i < unionCount ; i++)
-    {
-        printf("%d ", *(unionArray + i));
-    }
-
-    free(array1);
-    free(array2);
-    free(intersectionArray);
-    free(unionArray);
+    return 0;
 }
