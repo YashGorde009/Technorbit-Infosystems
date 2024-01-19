@@ -2,7 +2,7 @@
 #include<stdlib.h>
 #include<time.h>
 
-enum Boolean{FALSE = 0, TRUE = 1};
+enum boolean{FALSE = 0, TRUE = 1};
 
 void input(int*, int);
 void display(int*, int N, const char*);
@@ -83,7 +83,7 @@ void bubble_sort(int* arr, int N)
 {
     int itr, i;
 
-    enum Boolean flag;
+    enum boolean flag;
 
     for(itr = 1 ; itr < N ; itr++)
     {
@@ -108,7 +108,6 @@ void bubble_sort(int* arr, int N)
 void swap(int* num1, int* num2)
 {
     int temp;
-    
     temp = *num1;
     *num1 = *num2;
     *num2 = temp;
