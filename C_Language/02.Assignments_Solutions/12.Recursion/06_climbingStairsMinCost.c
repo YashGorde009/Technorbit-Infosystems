@@ -21,7 +21,7 @@ int minimum(int a, int b)
         return a;
 }
 
-int minimum_cost(int cost[], int cs, int ts) // currentStair(cs), targetStai(ts)
+int minimum_cost(int cost[], int cs, int ts) // currentStair(cs), targetStair(ts)
 {
     int oneStep, twoStep;
 
