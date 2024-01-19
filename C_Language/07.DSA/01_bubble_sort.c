@@ -81,7 +81,7 @@ void display(int* arr, int N, const char* msg)
 
 void bubble_sort(int* arr, int N)
 {
-    int itr, i;
+    int itr, i; // No. Of Iteration(itr), iterator(i)
 
     enum boolean flag;
 
