@@ -50,7 +50,7 @@ void main()
     free(arr);
     arr = NULL;
 
-    exit(EXIT_FAILURE);
+    exit(EXIT_SUCCESS);
 }
 
 void input(int* arr, int N)
