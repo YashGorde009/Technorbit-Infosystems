@@ -110,19 +110,16 @@ void linear_search_iterative(int* arr, int N, int num_search)
     }
 }
 
-int linear_search_recursive(int* arr, int num_search, int idx, int N)
+int linear_search_recursive(int* arr, int num_search, int idx, int N) // index(idx)
 {
-    if(idx == N)
-        return -1;
+    if(idx < N)
+    {
+        if(num_search == arr[idx])
+            return idx;
 
-    if(num_search == arr[idx])
-    {
-        return idx;
+        return linear_search_recursive(arr, num_search, idx+1, N);
     }
-    else
-    {
-        linear_search_recursive(arr, num_search, idx+1, N);
-    }
+    return -1;
 }
 
 void merge_sort(int* arr, int low, int high)
