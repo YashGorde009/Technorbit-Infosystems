@@ -1,0 +1,1 @@
+//write a c program to check whether given linked list is circular or not
