@@ -66,7 +66,7 @@ struct Stack* create_stack()
     }
 
     puts("Enter Capacity :");
-    scanf("%d", &cap);  // scanf("%d", stack -> capacity); 
+    scanf("%d", &cap);  // scanf("%d", &(stack -> capacity)); 
 
     stack -> capacity = cap; 
 
