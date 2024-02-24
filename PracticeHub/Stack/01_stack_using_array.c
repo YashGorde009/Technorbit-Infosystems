@@ -26,7 +26,7 @@ int main(void)
     do
     {
         puts("1. Push In Stack...");
-        puts("2. Pop From Stack..."); // pop (element display kar ani mg delete kar)
+        puts("2. Pop From Stack..."); // pop (element return kar ani mg delete kar)
         puts("3. Peak Inside Stack...");
         puts("4. Display Stack...");
         puts("0. Exit...");
