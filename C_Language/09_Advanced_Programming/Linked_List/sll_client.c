@@ -15,24 +15,24 @@ void main()
 
     status = insert_start(p_list, 10);
     assert(status == SUCCESS);
-
     show_list(p_list, "After insert start");
+
     status = insert_end(p_list, 20);
     assert(status == SUCCESS);
-
     show_list(p_list, "After insert start");
+
     status = insert_start(p_list, 30);
     assert(status == SUCCESS);
-
     show_list(p_list, "After insert start");
+
     status = insert_start(p_list, 40);
     assert(status == SUCCESS);
-
     show_list(p_list, "After insert start");
+    
     status = insert_start(p_list, 50);
     assert(status == SUCCESS);
-
     show_list(p_list, "After insert start");
+
     status = insert_start(p_list, 60);
     assert(status == SUCCESS);
     show_list(p_list, "After insert start");
@@ -74,7 +74,7 @@ void main()
 
     // 3
 
-    status = remove_data(p_list, 70);
+    status = remove_data(p_list, -5000);
     assert(status == SUCCESS);
     show_list(p_list, "After remove data");
 
@@ -82,14 +82,29 @@ void main()
 
     status = pop_start(p_list, &p_start_data);
     assert(status == SUCCESS);
-    printf("Popped data = [%d]\n", p_start_data);
+    printf("Popped start data = [%d]\n", p_start_data);
 
     // 5
 
     status = pop_end(p_list, &p_end_data);
     assert(status == SUCCESS);
-    printf("Popped data = [%d]\n", p_end_data);
+    printf("Popped end data = [%d]\n", p_end_data);
 
+    // 6
+
+    status = is_list_empty(p_list);
+    assert(status == SUCCESS);
+    
+
+    // 7
+
+    status = find(p_list, 30);
+    assert(status == TRUE);
+
+    // 8
+
+    length = get_list_length(p_list);
+    printf("List length : %d\n", length);
 
     // 6
 
@@ -97,39 +112,10 @@ void main()
     assert(status == SUCCESS);
     show_list(p_list, "After clear list");
 
-    // 7
-
-    status = is_list_empty(p_list);
-    assert(status == TRUE);
-    switch(status)
-    {
-        case (LIST_EMPTY) : puts("List emtpy");
-            break;
-        case (LIST_NOT_EMPTY) : puts("List not empty");
-            break;
-    }
-
-    // 8
-
-    status = find(p_list, 30);
-    switch(status)
-    {
-        case (LIST_DATA_FOUND) : puts("Data found");
-            break;
-        case (LIST_DATA_NOT_FOUND) : puts("Data not found");
-            break;
-    }
-
-    // 9
-
-    length = get_list_length(p_list);
-    printf("List length : %d\n", length);
-
     // 10
 
     status = destroy_list(&p_list);
-    assert(status == SUCCESS);
-    show_list(p_list, "After destroy list");
-
+    assert(status == SUCCESS); 
+    
     // assignment_part
 }

@@ -2,6 +2,8 @@
 #include<stdlib.h>
 #include "sll.h"
 
+typedef int counter_t;
+
 sll_t* create_list(void)
 {
     return (get_node(0));
@@ -239,6 +241,7 @@ status_t pop_start(sll_t* p_list, data_t* p_start_data)
     *p_start_data = p_list->next->data;
     temp = p_list->next;
     p_list->next = temp->next;
+
     free(temp);
     temp = NULL;
 
@@ -273,26 +276,6 @@ status_t pop_end(sll_t* p_list, data_t* p_end_data)
 
 // 6
 
-status_t clear_list(sll_t* p_list)
-{
-    node_t* run = NULL;
-
-    if(p_list->next == NULL)
-        return (LIST_EMPTY);
-
-    run = p_list->next;
-
-    while(run != NULL)
-    {
-        run->data = 0;
-        run = run->next;
-    }
-
-    return (SUCCESS);
-}
-
-// 7
-
 status_t is_list_empty(sll_t* p_list)
 {
     if(p_list->next == NULL)
@@ -301,7 +284,7 @@ status_t is_list_empty(sll_t* p_list)
     return (SUCCESS);
 }
 
-// 8
+// 7
 
 status_t find(sll_t* p_list, data_t f_data)
 {
@@ -320,7 +303,7 @@ status_t find(sll_t* p_list, data_t f_data)
     return (FALSE);
 }
 
-// 9
+// 8
 
 len_t get_list_length(sll_t* p_list)
 {
@@ -340,32 +323,53 @@ len_t get_list_length(sll_t* p_list)
     return (count);
 }
 
-// 10
+// 9
 
-status_t destroy_list(sll_t** p_list)
+status_t clear_list(sll_t* p_list)
 {
     node_t* run = NULL;
     node_t* run_after = NULL;
 
-    if((*p_list)->next == NULL)
-        return (LIST_EMPTY);
+    if(p_list->next == NULL)
+        return (SUCCESS);
 
-    run = (*p_list)->next;
-    run_after = run->next;
+    run = p_list->next;
 
-    while(run_after != NULL)
+    while(run != NULL) 
     {
-        free(run);
-        run = NULL;
-        run = run_after->next;
-        free(run_after);
-        run_after = NULL;
-
         run_after = run->next;
+        free(run);
+        run = run_after;
     }
-    (*p_list)->next = NULL;
+
+    p_list->next = NULL;
 
     return (SUCCESS);
 }
 
-// assignment_part
+// 10
+
+status_t destroy_list(sll_t** pp_list)
+{
+    node_t* run = NULL;
+    node_t* run_after = NULL;
+
+    if((*pp_list)->next == NULL)
+        return (SUCCESS);
+
+    run = (*pp_list)->next;
+
+    while(run != NULL) 
+    {
+        run_after = run->next;
+        free(run);
+        run = run_after;
+    }
+
+    free(*pp_list);
+    *pp_list = NULL;
+    
+    return (SUCCESS);
+}
+
+// // assignment_part
