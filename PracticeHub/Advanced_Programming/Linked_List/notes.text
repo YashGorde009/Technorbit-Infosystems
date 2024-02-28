@@ -1,0 +1,12 @@
+sll.h      : sagle functions che declaration 
+             hi header file parat define nai jhali pahije
+
+            1. SUCCESS/FAILURE : status ahe mhanun apna int la typedef 'status_t' kel
+
+
+server-client architecture
+
+sll_client : functions/services vaprnari file mhanije sll_client.c  (sagle function che call)
+             service vaprnara kon asto client
+
+sll_server : service provide karnara kon asto server (sagle functions che definitions)
